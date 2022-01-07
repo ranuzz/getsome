@@ -1,5 +1,6 @@
+"""Main module."""
+
 import feedparser
-import click
 
 def readFeeds(lc):
     with open('feeds.txt', 'r') as fp:
@@ -14,10 +15,6 @@ def readFeeds(lc):
                     break
                 c += 1
 
-@click.command()
-@click.option('--lc', default=-1, help='Number of links')
 def getsome(lc):
     readFeeds(lc)
 
-if __name__ == "__main__":
-    getsome()
