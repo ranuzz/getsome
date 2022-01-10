@@ -1,14 +1,16 @@
 """Console script for getsome."""
 import sys
 import click
-from getsome.getsome import readFeeds
+from getsome.core.main import run
+
 
 @click.command()
 @click.option('--lc', default=-1, help='Number of links')
-def main(lc, args=None):
+@click.option('--verbose', default=False, help='Verbose mode')
+def main(lc, verbose, args=None):
     """Console script for getsome."""
-    click.echo("GetSome !")
-    readFeeds(lc)
+    # click.echo("GetSome !")
+    run(lc, verbose)
     return 0
 
 

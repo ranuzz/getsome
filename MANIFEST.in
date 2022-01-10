@@ -3,7 +3,8 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-include feeds.txt
+include getsome/feeds.txt
+include getsome/getsome.cfg
 
 recursive-include tests *
 recursive-exclude * __pycache__
