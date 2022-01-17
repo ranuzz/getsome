@@ -4,7 +4,7 @@ from getsome import AppConfig, SqlBase
 
 from sqlalchemy.orm import sessionmaker
 
-from getsome.models.metadata import get_or_create_metadata
+from getsome.models.metadata import get_or_create_metadata, update_metadata_feedsync
 from getsome.models.rss import add_rss_init
 
 
@@ -35,3 +35,4 @@ def initdb():
 
     if metadata.feedsync.timestamp() == 0.0:
         add_rss_init(dbsession)
+        update_metadata_feedsync(dbsession)

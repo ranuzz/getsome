@@ -1,30 +1,39 @@
 """Main module."""
 import logging
-import feedparser
 from random import choice
 import webbrowser
 
 from getsome.db.initdb import initdb
-
-
-def readFeeds(lc):
-    all_links = []
-    with open('feeds.txt', 'r') as fp:
-        for rssfeedlink in fp.readlines():
-            feeds = feedparser.parse(rssfeedlink)
-            # print(feeds['feed']['title'])
-            c = 0
-            for entry in feeds['entries']:
-                if lc == -1 or c < lc:
-                    # print(entry['title'], entry['link'])
-                    all_links.append(entry['link'])
-                else:
-                    break
-                c += 1
-    webbrowser.open_new_tab(choice(all_links))
+from getsome.db.session import get_db_session
+from getsome.models.link import recent_links, sync_link
+from getsome.models.rss import all_rss
 
 
 def run(lc, verbose):
-    # readFeeds(lc)
     logging.info('init db')
     initdb()
+
+    db_session = get_db_session()
+    
+    logging.info('getting rss')
+    rsss = all_rss(db_session)
+
+    if len(rsss) == 0:
+        logging.info("No RSS Found")
+
+    logging.info('evict old links')
+
+    logging.info('syncing new links')
+    sync_link(db_session, rss_feeds=rsss)
+
+    logging.info('get recent links')
+    links = recent_links(db_session)
+
+    if len(links) == 0:
+        logging.error('No links found')
+        return
+
+    logging.info('pick one') 
+    link = choice(links)
+
+    webbrowser.open_new_tab(link)

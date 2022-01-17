@@ -1,3 +1,4 @@
+from curses import meta
 from sqlalchemy import Column, Integer, DateTime
 from sqlalchemy import Sequence
 import datetime
@@ -18,3 +19,14 @@ def get_or_create_metadata(session):
     session.add(m)
     session.commit()
     return m
+
+def update_metadata_feedsync(session):
+    metadata = None
+    for row in session.query(Metadata).all():
+        metadata = row
+        break
+    if not metadata:
+        return
+    metadata.feedsync = datetime.datetime.now()
+    session.add(metadata)
+    session.commit()
