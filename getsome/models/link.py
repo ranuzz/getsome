@@ -34,7 +34,7 @@ def add_or_update_link(session, link):
     if not all_matched_links or len(all_matched_links) == 0:
         add_link(session, link)
     else:
-        update_link(all_matched_links[0])
+        update_link(session, all_matched_links[0])
 
 
 def sync_link(session, rss_feeds=[]):

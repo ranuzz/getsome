@@ -1,16 +1,13 @@
-"""Console script for getsome."""
 import sys
 import click
 from getsome.core.main import run
 
 
 @click.command()
-@click.option('--lc', default=-1, help='Number of links')
-@click.option('--verbose', default=False, help='Verbose mode')
-def main(lc, verbose, args=None):
-    """Console script for getsome."""
-    # click.echo("GetSome !")
-    run(lc, verbose)
+@click.option('--add', default="", help='Add a new link')
+@click.option('--rm', default="", help='Remove an existing link')
+def main(add, rm):
+    run(add, rm)
     return 0
 
 

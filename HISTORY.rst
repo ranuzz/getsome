@@ -11,3 +11,8 @@ History
 ------------------
 
 * Updating requirements.
+
+0.1.2 (2022-01-17)
+------------------
+
+* adding add and remove commands

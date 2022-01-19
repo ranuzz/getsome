@@ -39,3 +39,8 @@ def update_rss_synctime(session, rss):
     rss.lastsync = datetime.datetime.now()
     session.add(rss)
     session.commit()
+
+
+def remove_rss(session, uri):
+    session.query(Rss).filter(Rss.uri == uri).delete()
+    session.commit()

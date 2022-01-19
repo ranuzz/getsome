@@ -114,8 +114,6 @@ docs/
 # .github/
 # *.yml
 tox.ipynb_checkpoints
-# *.rst
-README.rst
 # .editorconfig
 # Makefile
 # *.ini

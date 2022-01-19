@@ -4,79 +4,16 @@
 
 from setuptools import setup, find_packages
 
-with open('README.md') as readme_file:
+with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'alabaster==0.7.12',
-    'appdirs==1.4.4',
-    'argh==0.26.2',
-    'attrs==21.4.0',
-    'Babel==2.9.1',
-    'black==21.7b0',
-    'bleach==4.1.0',
-    'bump2version==0.5.11',
-    'certifi==2021.10.8',
-    'cffi==1.15.0',
-    'charset-normalizer==2.0.10',
-    'click==7.1.2',
-    'colorama==0.4.4',
-    'cryptography==36.0.1',
-    'distlib==0.3.4',
-    'docutils==0.18.1',
-    'entrypoints==0.3',
-    'feedparser==6.0.8',
-    'filelock==3.4.2',
-    'flake8==3.7.8',
-    'greenlet==1.1.2',
-    'idna==3.3',
-    'imagesize==1.3.0',
-    'importlib-metadata==4.10.1',
-    'iniconfig==1.1.1',
-    'jeepney==0.7.1',
-    'Jinja2==3.0.3',
-    'keyring==23.5.0',
-    'MarkupSafe==2.0.1',
-    'mccabe==0.6.1',
-    'mypy-extensions==0.4.3',
-    'packaging==21.3',
-    'pathspec==0.9.0',
-    'pkginfo==1.8.2',
-    'platformdirs==2.4.1',
-    'pluggy==0.13.1',
-    'py==1.11.0',
-    'pycodestyle==2.5.0',
-    'pycparser==2.21',
-    'pyflakes==2.1.1',
-    'Pygments==2.11.2',
-    'pyparsing==3.0.6',
-    'pytest==6.2.4',
-    'pytz==2021.3',
-    'PyYAML==6.0',
-    'readme-renderer==32.0',
-    'regex==2021.11.10',
-    'requests==2.27.1',
-    'requests-toolbelt==0.9.1',
-    'rfc3986==2.0.0',
-    'SecretStorage==3.3.1',
-    'six==1.16.0',
-    'snowballstemmer==2.2.0',
-    'Sphinx==1.8.5',
-    'sphinxcontrib-serializinghtml==1.1.5',
-    'sphinxcontrib-websupport==1.2.4',
     'SQLAlchemy==1.4.29',
-    'toml==0.10.2',
-    'tomli==1.2.3',
-    'tox==3.14.0',
-    'tqdm==4.62.3',
-    'twine==3.7.1',
-    'urllib3==1.26.8',
-    'virtualenv==20.13.0',
-    'webencodings==0.5.1',
-    'zipp==3.7.0',
+    'click==7.1.2',
+    'feedparser==6.0.8'
 ]
 
 test_requirements = ['pytest>=3', ]
@@ -111,6 +48,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/ranuzz/getsome',
-    version='0.1.1',
+    version='0.1.2',
     zip_safe=False,
 )

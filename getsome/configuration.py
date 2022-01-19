@@ -32,7 +32,8 @@ class AppConfig:
         os.makedirs(self.abs_log_folder, exist_ok=True)
         log_file = os.path.join(
             self.abs_log_folder,
-            datetime.datetime.now().strftime(self.log_file_pattern) + ".log")
+            "getsome.log")
+        #datetime.datetime.now().strftime(self.log_file_pattern) + ".log")
         logging.basicConfig(
             filename=log_file,
             stream=sys.stdout,
