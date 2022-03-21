@@ -16,3 +16,8 @@ History
 ------------------
 
 * adding add and remove commands
+
+0.1.3 (2022-03-17)
+------------------
+
+* adding fetch and sync commands
