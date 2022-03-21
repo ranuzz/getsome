@@ -5,7 +5,7 @@ from getsome import AppConfig, SqlBase
 from sqlalchemy.orm import sessionmaker
 
 from getsome.models.metadata import get_or_create_metadata, update_metadata_feedsync
-from getsome.models.rss import add_rss_init
+from getsome.models.rss import add_rss_from_feed
 
 
 def initdb():
@@ -33,6 +33,23 @@ def initdb():
         logging.error("Not able to get or create metadata")
         return
 
-    if metadata.feedsync.timestamp() == 0.0:
-        add_rss_init(dbsession)
-        update_metadata_feedsync(dbsession)
+    add_rss_from_feed(dbsession, 1)
+    update_metadata_feedsync(dbsession)
+
+def sync_rss_from_feed():
+    SqlBase.metadata.create_all(AppConfig.db_engine)
+
+    dbsession = None
+    try:
+        Session = sessionmaker()
+        Session.configure(bind=AppConfig.db_engine)
+        dbsession = Session()
+    except Exception as e:
+        logging.error(e)
+        logging.error("None able to get DB session")
+        return
+    if not dbsession:
+        logging.error("DB session is invalid")
+        return
+    add_rss_from_feed(dbsession, 0)
+    update_metadata_feedsync(dbsession)

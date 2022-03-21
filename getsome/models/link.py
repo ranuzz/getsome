@@ -21,7 +21,7 @@ def add_link(session, uri):
 
 def update_link(session, link):
     link.added = datetime.datetime.now()
-    session.save(link)
+    session.update(link)
     session.commit()
 
 
@@ -41,6 +41,7 @@ def sync_link(session, rss_feeds=[]):
     for rss in rss_feeds:
         links = scan_rss_feed(rss)
         for link in links:
+            print('adding link : {0}'.format(link))
             add_or_update_link(session, link)
 
 

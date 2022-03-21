@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy import Sequence
 import datetime
+import feedparser
 
 from getsome import AppConfig, SqlBase
 
@@ -18,10 +19,20 @@ def add_rss(session, uri):
     session.commit()
 
 
-def add_rss_init(session):
+def add_rss_from_feed(session, maxsync):
+    added_so_far = 0
     with open(AppConfig.rss_feed_path, 'r') as fp:
         for line in fp.readlines():
-            add_rss(session, line)
+            if maxsync and added_so_far >= maxsync:
+                return
+            all_matched_links = session.query(Rss).filter(Rss.uri == line).all()
+            if not all_matched_links or len(all_matched_links) == 0:
+                feeds = feedparser.parse(line)
+                if len(feeds.entries) != 0:
+                    if maxsync == 0:
+                        print("adding new RSS Link : {0}".format(line))
+                    add_rss(session, line)
+                    added_so_far += 1
 
 
 def all_rss(session):
