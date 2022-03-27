@@ -2,7 +2,7 @@
 
 __author__ = """shekhar chandra"""
 __email__ = 'ranuzz@outlook.com'
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 import logging
 

@@ -13,7 +13,8 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'SQLAlchemy==1.4.29',
     'click==7.1.2',
-    'feedparser==6.0.8'
+    'feedparser==6.0.8',
+    'requests==2.27.1'
 ]
 
 test_requirements = ['pytest>=3', ]
@@ -48,6 +49,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/ranuzz/getsome',
-    version='0.1.4',
+    version='0.1.5',
     zip_safe=False,
 )

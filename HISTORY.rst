@@ -22,9 +22,14 @@ History
 
 * adding fetch and sync commands
 
-0.1.4 (2022-03-17)
+0.1.4 (2022-03-27)
 ------------------
 
 * remove sync command
 * add bulk rss sync commands
 * add rss link list command
+
+0.1.5 (2022-03-27)
+------------------
+
+* fix requirements
