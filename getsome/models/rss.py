@@ -1,9 +1,12 @@
+from asyncio import run_coroutine_threadsafe
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy import Sequence
 import datetime
 import feedparser
+import requests
 
 from getsome import AppConfig, SqlBase
+from getsome.core.utils import validate_uri
 
 
 class Rss(SqlBase):
@@ -33,6 +36,39 @@ def add_rss_from_feed(session, maxsync):
                         print("adding new RSS Link : {0}".format(line))
                     add_rss(session, line)
                     added_so_far += 1
+
+
+def add_rss_bulk(session, uris):
+    for uri in uris:
+        add_rss(session, uri)
+
+
+def add_rss_from_url(session, uri):
+    try:
+        response = requests.get(uri)
+        response_str = response.content.decode('utf-8')
+        uris = []
+        for u in response_str.splitlines():
+            if (validate_uri(u)):
+                uris.append(u)
+        add_rss_bulk(session, uris)
+    except:
+        pass
+
+
+def list_rss_urls(session):
+    rsss = session.query(Rss).all()
+    for rss in rsss:
+        print(rss.uri)
+
+
+def add_rss_from_file(session, filename):
+    uris = []
+    with open(filename, 'r') as fp:
+        for line in fp.readlines():
+            if validate_uri(line):
+                uris.append(line)
+    add_rss_bulk(session, uris)
 
 
 def all_rss(session):
