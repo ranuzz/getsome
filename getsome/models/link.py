@@ -21,7 +21,7 @@ def add_link(session, uri):
 
 def update_link(session, link):
     link.added = datetime.datetime.now()
-    session.update(link)
+    session.add(link)
     session.commit()
 
 

@@ -47,6 +47,9 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
+clean-ui:
+	rm -rf ui/src/dist
+
 lint/flake8: ## check style with flake8
 	flake8 getsome tests
 lint/black: ## check style with black
@@ -76,6 +79,12 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+
+ui:
+	cd ui/src && npm install && npm run build
+
+serveui: ui
+	cd ui/src && npm run dev
 
 release: dist ## package and upload a release
 	twine upload dist/*

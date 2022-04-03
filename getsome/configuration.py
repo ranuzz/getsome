@@ -5,7 +5,7 @@ from pathlib import Path
 import logging
 from sqlalchemy import create_engine
 import datetime
-
+import distutils.dir_util
 
 class AppConfig:
     app_home = None
@@ -27,6 +27,8 @@ class AppConfig:
 
     sql_alchemy_conn = None
 
+    server_www_files = None
+
     def setup_log(self):
         self.abs_log_folder = os.path.join(self.app_home, self.base_log_folder)
         os.makedirs(self.abs_log_folder, exist_ok=True)
@@ -45,6 +47,10 @@ class AppConfig:
     def setup_db(self):
         self.db_engine = create_engine(self.sql_alchemy_conn)
 
+    def setup_server(self):
+        self.server_www_files = os.path.join(self.app_home, self.base_log_folder, 'www')
+        os.makedirs(self.server_www_files, exist_ok=True)
+        distutils.dir_util.copy_tree(os.path.join(os.path.dirname(__file__), 'ui'), self.server_www_files)
 
 def _read_default_file(file_name):
     file_path = os.path.join(os.path.dirname(__file__), file_name)

@@ -12,9 +12,10 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'SQLAlchemy==1.4.29',
-    'click==7.1.2',
+    'click==8.1.2',
     'feedparser==6.0.8',
-    'requests==2.27.1'
+    'requests==2.27.1',
+    'Flask==2.1.1'
 ]
 
 test_requirements = ['pytest>=3', ]
@@ -37,6 +38,7 @@ setup(
     entry_points={
         'console_scripts': [
             'getsome=getsome.cli:main',
+            'getsome-server=getsome.www.server:main'
         ],
     },
     install_requires=requirements,
@@ -50,5 +52,5 @@ setup(
     tests_require=test_requirements,
     url='https://github.com/ranuzz/getsome',
     version='0.1.5',
-    zip_safe=False,
+    zip_safe=False
 )
