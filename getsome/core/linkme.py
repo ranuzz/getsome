@@ -5,7 +5,7 @@ import webbrowser
 from getsome.models.rss import all_rss
 from getsome.models.link import recent_links, sync_link
 
-def linkme(session):
+def linkme(session, open_browser=True):
     logging.info('getting rss')
     rsss = all_rss(session)
 
@@ -25,5 +25,8 @@ def linkme(session):
 
     logging.info('pick one') 
     link = choice(links)
-    print("Opening Link : {0}".format(link))
-    webbrowser.open_new_tab(link)
+    if (open_browser):
+        print("Opening Link : {0}".format(link))
+        webbrowser.open_new_tab(link)
+    else:
+        return link

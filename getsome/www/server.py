@@ -1,8 +1,13 @@
 import os
 from flask import Flask, send_from_directory
 from getsome import AppConfig
+from getsome.core.main import serve_link
 
 app = Flask(__name__, static_folder=AppConfig.server_www_files)
+
+@app.route('/getsome')
+def getsomeUrl():
+    return serve_link()
 
 # Serve React App
 @app.route('/', defaults={'path': ''})

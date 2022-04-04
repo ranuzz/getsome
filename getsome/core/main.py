@@ -44,3 +44,8 @@ def run(add, rm, addlist, addlistlocal, list, fetch):
         add_rss_from_file(db_session, addlistlocal)
     else:
         linkme(db_session)
+
+def serve_link():
+    initdb()
+    db_session = get_db_session()
+    return linkme(db_session, open_browser=False)
