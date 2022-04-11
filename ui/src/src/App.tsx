@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { RefreshIcon, CogIcon } from '@heroicons/react/outline'
+import { Dialog, Transition  } from '@headlessui/react'
 import './App.css'
+import { Settings } from './settings'
+
 
 function App() {
 
   const [iframeSrc, setIframeSrc] = useState<string>('https://makeall.dev/')
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState(false)
 
   const urls = [
     'https://makeall.dev/posts/glitch-vs-stackblitz/',
@@ -33,16 +38,34 @@ function App() {
     <div>
       <iframe src={iframeSrc} className="curframe"></iframe>
       <div className='getsomepanel'>
-        <div className='btnone gspbtn' onClick={getsome}>
-          R
+        <div className='gspbtn' onClick={getsome}>
+          <RefreshIcon className="gspicon"></RefreshIcon>
         </div>
-        <div className='btntwo gspbtn'>
-          S
-        </div>
-        <div className='btnthree gspbtn'>
-          X
+        <div className='gspbtn' onClick={() => setIsSettingModalOpen(true)}>
+          <CogIcon className="gspicon"></CogIcon>
         </div>
       </div>
+      <Transition
+        show={isSettingModalOpen}
+        enter="transition duration-100 ease-out"
+        enterFrom="transform scale-95 opacity-0"
+        enterTo="transform scale-100 opacity-100"
+        leave="transition duration-75 ease-out"
+        leaveFrom="transform scale-100 opacity-100"
+        leaveTo="transform scale-95 opacity-0"
+      >
+        <Dialog open={isSettingModalOpen} onClose={() => setIsSettingModalOpen(false)} className="dialog">
+          <div className='dialog-container'>
+            <Dialog.Overlay className="dialog-overlay" />
+            <div className='dialog-body'>
+              <Settings></Settings>
+
+              {/* <button onClick={() => setIsSettingModalOpen(false)}>Deactivate</button>
+              <button onClick={() => setIsSettingModalOpen(false)}>Cancel</button> */}
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   )
 }
