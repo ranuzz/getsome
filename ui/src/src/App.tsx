@@ -59,9 +59,6 @@ function App() {
             <Dialog.Overlay className="dialog-overlay" />
             <div className='dialog-body'>
               <Settings></Settings>
-
-              {/* <button onClick={() => setIsSettingModalOpen(false)}>Deactivate</button>
-              <button onClick={() => setIsSettingModalOpen(false)}>Cancel</button> */}
             </div>
           </div>
         </Dialog>
